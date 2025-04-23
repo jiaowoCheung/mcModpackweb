@@ -1,0 +1,14 @@
+
+{
+        "id": 432,
+        "name": "Minecraft",
+        "slug": "minecraft",
+        "dateModified": "2024-08-29T09:54:14.45Z",
+        "assets": {
+            "iconUrl": "https://media.forgecdn.net/avatars/1070/13/638605220544214742.webp",
+            "tileUrl": "https://media.forgecdn.net/game-box-art/432_2734e7e3-c584-46e0-81ca-75973b380c9b.webp",
+            "coverUrl": "https://media.forgecdn.net/game-covers/432_5076448d-feda-439b-9d63-ce86b70459ef.webp"
+        },
+        "status": 6,
+        "apiStatus": 2
+}
