@@ -13,9 +13,8 @@ def crawl_target_text():
     results = []
     page = 1
     has_next_page = True
-    
+    #构造分页url
     while has_next_page:
-        # 构造带分页参数的URL
         if page == 1:
             current_url = base_url  # 第一页不需要参数
         else:
@@ -23,7 +22,7 @@ def crawl_target_text():
         
         print(f"正在爬取第 {page} 页: {current_url}")  # 调试信息
         
-        # 随机延迟防封禁
+        # 随机延迟
         time.sleep(random.uniform(1, 3))
         
         page_content = fetch_page(current_url, headers)

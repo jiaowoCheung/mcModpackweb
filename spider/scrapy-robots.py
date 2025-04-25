@@ -82,6 +82,15 @@ class MCMODCrawler:
                 data.append(text)
         return data
 
+
+    def url_data(self,soup):
+        data = []
+        items = soup.select('.modlist-block .cover a ')
+        for item in items:
+            text = item.get_text(strip=True)
+            if text:
+                data.append(text)
+        return data
 if __name__ == "__main__":
     start = time.time()
     crawler = MCMODCrawler()
