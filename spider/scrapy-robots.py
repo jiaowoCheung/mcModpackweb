@@ -90,6 +90,7 @@ class MCMODCrawler:
         for block in blocks:
             title_elem = block.select_one('.title p.name a')
             link_elem = block.select_one('.cover a[href]')
+            picture=block.select_one('.cover a img[src]')
             
             if not title_elem or not link_elem:
                 continue
@@ -99,7 +100,8 @@ class MCMODCrawler:
             
             items.append({
                 "text": title_elem.get_text(strip=True),
-                "link": full_link
+                "link": full_link,
+                'img':picture.get('src') if picture else None
             })
         
         return items
