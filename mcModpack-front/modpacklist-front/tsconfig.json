@@ -5,8 +5,10 @@
       { "path": "./tsconfig.node.json" }
     ],
     "compilerOptions": {
-      "types": ["node"],
+      "types": ["node","vite/client", "vue"],
       "moduleResolution": "node",
+      "target": "ESNext",
+      "strict": true,
       "baseUrl": ".",
       "paths": {"@/*": ["./src/*"] },
     }
