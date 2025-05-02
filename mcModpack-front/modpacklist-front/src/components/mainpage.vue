@@ -1,20 +1,44 @@
 <script setup lang="ts">
-import { defineProps ,ref,watch} from 'vue'
+import { defineProps ,ref,watch,onMounted} from 'vue'
 defineProps<{ msg: string }>()
 import background from '@/assets/picture/background.jpg'
 import ProjectSearch from '@/components/searchplugin.vue'
+import PageSelect from '@/components/PageSelect.vue'
 // 搜索相关逻辑
 
 const searchValue = ref('')
 const searchOptions = ref([
+  //backend返回的项目列表
+  //backend未完成
   { id: 1, label: '项目A' },
   { id: 2, label: '项目B' },
-  { id: 3, label: '项目C' },
+  { id: 3, label: '项目C' } ,
   // 更多项目...
 ])
+
+interface ImageItem {
+  id: number
+  title: string
+  imgUrl: string
+  engtitle: string
+}
+const imageData = ref<ImageItem[]>([])
+
 watch(searchValue, (newVal) => {
   console.log('searchValue变化:', newVal) // 确认是否接收到更新
 })
+
+const fetchImages = async () => {
+  // 这里模拟数据，实际替换为你的API调用
+  const mockData: ImageItem[] = Array.from({ length: 100 }, (_, i) => ({
+    id: i + 1,
+    title: `图片标题 ${i + 1}`,
+    imgUrl: `https://picsum.photos/200/150?random=${i}`,
+    engtitle: `photo title`
+  }))
+  
+  imageData.value = mockData
+}
 
 
 const handleProjectSelect = (project: { id: number | string; label: string }) => {
@@ -22,6 +46,14 @@ const handleProjectSelect = (project: { id: number | string; label: string }) =>
   
   // 这里可以添加选择项目后的逻辑
 }
+
+const handlePageChange = (page: number) => {
+  console.log('当前页码:', page)
+}
+onMounted(() => {
+  fetchImages()
+})
+
 </script>
 
 <template>
@@ -33,7 +65,7 @@ const handleProjectSelect = (project: { id: number | string; label: string }) =>
     <div class="content">
       <h1 class="title-font">{{ msg }}</h1>
       
-      <!-- 使用封装的搜索框组件 -->
+      <!-- 搜索框 -->
       <ProjectSearch
         v-model="searchValue"
         :options="searchOptions"
@@ -41,7 +73,11 @@ const handleProjectSelect = (project: { id: number | string; label: string }) =>
         class="search-box"
       />
       
-      <!-- 其他页面内容 -->
+      <!-- 分页组件 -->
+      <PageSelect 
+        :data="imageData" 
+        @page-change="handlePageChange"
+      />
     </div>
   </div>
 </template>
