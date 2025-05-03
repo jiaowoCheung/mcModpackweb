@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import pymysql
+pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,9 +76,17 @@ WSGI_APPLICATION = "mcModpackweb.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mcmodpack',      # 数据库名
+        'USER': 'mcmodpack',          # 数据库用户名
+        'PASSWORD': '@Cheung0528',      # 数据库密码
+        'HOST': '124.222.150.220', # 远程MySQL服务器IP或域名
+        'PORT': '3306',                   # MySQL端口(默认3306)
+        'OPTIONS': {
+            'charset': 'utf8mb4',         # 推荐使用utf8mb4以支持完整Unicode
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
